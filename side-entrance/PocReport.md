@@ -38,9 +38,9 @@ An attacker can use the flash loan callback to deposit the borrowed ETH into the
 This allows the attacker to drain the pool's ETH.
 
 ## 5. Proof of Concept (PoC)
-
+```solidity
   ```javascript
-  ```solidity
+  
 
     function testExploit() public {
         // Check initial balances
@@ -59,9 +59,9 @@ This allows the attacker to drain the pool's ETH.
         assertEq(address(pool).balance, 0);
         assertEq(address(attacker).balance, 1000 ether);
     }
-   ``` 
+   ```
     ```
-
+```solidity
 ## 6. Recommended Mitigation
 
 Separate flash loan repayment accounting from user deposit accounting. The pool should verify repayment without allowing borrowed funds deposited during the callback to create an independently withdrawable balance.
@@ -69,3 +69,4 @@ Separate flash loan repayment accounting from user deposit accounting. The pool 
 ## 7. Conclusion
 
 The vulnerability occurs because the pool treats restoration of its ETH balance as sufficient proof of repayment, while its deposit mechanism simultaneously credits the borrower with a withdrawal claim.
+```

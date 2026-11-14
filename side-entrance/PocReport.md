@@ -28,7 +28,7 @@ if (address(this).balance < balanceBefore) {
 }
 ```
  ```
- 
+
 The pool checks its ETH balance but does not account for the fact that the callback can create a withdrawal claim for the borrower.
 
 ## 4. Impact
@@ -40,7 +40,8 @@ This allows the attacker to drain the pool's ETH.
 ## 5. Proof of Concept (PoC)
 
   ```javascript
-  
+  ```solidity
+
     function testExploit() public {
         // Check initial balances
         assertEq(address(pool).balance, 1000 ether);
@@ -58,6 +59,7 @@ This allows the attacker to drain the pool's ETH.
         assertEq(address(pool).balance, 0);
         assertEq(address(attacker).balance, 1000 ether);
     }
+   ``` 
     ```
 
 ## 6. Recommended Mitigation
